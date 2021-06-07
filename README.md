@@ -1,6 +1,6 @@
 ### Introduction
 Thank you for checking out my project! This program is designed to identify a target face out of other face images. For
-example, you can have three images of different people and another target image of one of those three people and the
+example, from three images of different people and another target image of one of those three people the
 program should be able to match the correct face to the target. This program is made almost entirely from scratch,
 only using libraries for basic image processing (PIL) and array processing and display (NumPy, Pyplot).
 
