@@ -1,0 +1,9 @@
+List all strings of face images you want to include in the "potential" list:
+
+"face1.jpg"
+"face2.jpg"
+"face3.jpg"
+
+List the string of the test/target image:
+
+"testimage3.jpg"
