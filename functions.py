@@ -28,7 +28,7 @@ def forehead_point (edge_matrix):
 
     startingPoint = int(edge_matrix.shape[1] / 3)
 
-    while edge_matrix[int(edge_matrix.shape[0] / 2), startingPoint] != 1:
+    while edge_matrix[int(edge_matrix.shape[0] / 2), startingPoint] != 1 and startingPoint > 1:
         edge_matrix[int(edge_matrix.shape[0] / 2), startingPoint] = 2
         startingPoint -= 1
 
@@ -43,7 +43,7 @@ def chin_point (edge_matrix):
 
     startingPoint = int(edge_matrix.shape[1] - 1)
 
-    while edge_matrix[int(edge_matrix.shape[0] / 2), startingPoint] != 1:
+    while edge_matrix[int(edge_matrix.shape[0] / 2), startingPoint] != 1 and startingPoint > 1:
         edge_matrix[int(edge_matrix.shape[0] / 2), startingPoint] = 2
         startingPoint -= 1
 
@@ -64,10 +64,10 @@ def forehead_width (edge_matrix):
     #step 2: find forehead width
     rightSideForehead = midForehead[0]
     leftSideForehead = midForehead[0]
-    while edge_matrix[rightSideForehead, midForehead[1]] != 1 and edge_matrix[rightSideForehead, midForehead[1] + int(faceLength / 30)] != 1 and edge_matrix[rightSideForehead, midForehead[1] - int(faceLength / 22)] != 1:
+    while rightSideForehead < edge_matrix.shape[0] - 1 and edge_matrix[rightSideForehead, midForehead[1]] != 1 and edge_matrix[rightSideForehead, midForehead[1] + int(faceLength / 30)] != 1 and edge_matrix[rightSideForehead, midForehead[1] - int(faceLength / 22)] != 1:
         edge_matrix[rightSideForehead, midForehead[1]] = 2
         rightSideForehead += 1
-    while edge_matrix[leftSideForehead, midForehead[1]] != 1 and edge_matrix[leftSideForehead, midForehead[1] + int(faceLength / 30)] != 1 and edge_matrix[leftSideForehead, midForehead[1] - int(faceLength / 22)] != 1:
+    while leftSideForehead > 1 and edge_matrix[leftSideForehead, midForehead[1]] != 1 and edge_matrix[leftSideForehead, midForehead[1] + int(faceLength / 30)] != 1 and edge_matrix[leftSideForehead, midForehead[1] - int(faceLength / 22)] != 1:
         edge_matrix[leftSideForehead, midForehead[1]] = 2
         leftSideForehead -= 1
 
@@ -90,10 +90,10 @@ def forehead_height (edge_matrix):
     hairline = aboveRightEyebrow[1]
     eyebrow = aboveRightEyebrow[1]
 
-    while edge_matrix[midForehead[0] + int(forehead_width(edge_matrix) / 4), hairline] != 1 and edge_matrix[midForehead[0] + int(forehead_width(edge_matrix) / 10) + int(forehead_width(edge_matrix) / 4), hairline] != 1 and edge_matrix[midForehead[0] - int(forehead_width(edge_matrix) / 10)+ int(forehead_width(edge_matrix) / 4), hairline] != 1:
+    while hairline > 1 and edge_matrix[midForehead[0] + int(forehead_width(edge_matrix) / 4), hairline] != 1 and edge_matrix[midForehead[0] + int(forehead_width(edge_matrix) / 10) + int(forehead_width(edge_matrix) / 4), hairline] != 1 and edge_matrix[midForehead[0] - int(forehead_width(edge_matrix) / 10)+ int(forehead_width(edge_matrix) / 4), hairline] != 1:
         edge_matrix[midForehead[0] + int(forehead_width(edge_matrix) / 4), hairline] = 2
         hairline -= 1
-    while edge_matrix[midForehead[0] + int(forehead_width(edge_matrix) / 4), eyebrow] != 1:
+    while eyebrow < edge_matrix.shape[1] - 1 and edge_matrix[midForehead[0] + int(forehead_width(edge_matrix) / 4), eyebrow] != 1:
         edge_matrix[midForehead[0] + int(forehead_width(edge_matrix) / 4), eyebrow] = 2
         eyebrow += 1
 
@@ -109,11 +109,11 @@ def lip_height (edge_matrix):
     faceLength = chin_point(edge_matrix)[1] - forehead_point(edge_matrix)[1]
     lips = chin_point(edge_matrix)[1] - int(faceLength / 10)
 
-    while edge_matrix[chin_point(edge_matrix)[0], lips] == 1:
+    while lips > 1 and edge_matrix[chin_point(edge_matrix)[0], lips] == 1:
         edge_matrix[chin_point(edge_matrix)[0], lips] = 2
         lips -= 1
 
-    while edge_matrix[chin_point(edge_matrix)[0], lips] != 1 or edge_matrix[chin_point(edge_matrix)[0] + int(forehead_width(edge_matrix) / 6), lips] != 1 or edge_matrix[chin_point(edge_matrix)[0] - int(forehead_width(edge_matrix) / 6), lips] != 1:
+    while lips > 1 and edge_matrix[chin_point(edge_matrix)[0], lips] != 1 or edge_matrix[chin_point(edge_matrix)[0] + int(forehead_width(edge_matrix) / 6), lips] != 1 or edge_matrix[chin_point(edge_matrix)[0] - int(forehead_width(edge_matrix) / 6), lips] != 1:
         edge_matrix[chin_point(edge_matrix)[0], lips] = 2
         lips -= 1
 
